@@ -1,0 +1,93 @@
+/* General page styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FDF8F4; /* Supporting color */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container and sections */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #F8E5DA; /* Primary color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #FFA07A; /* Primary color */
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #A57A8D; /* Supporting color */
+}
+
+section {
+    margin: 20px 0;
+}
+
+/* Input and button styling */
+input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #D1B28F; /* Primary color */
+    border-radius: 5px;
+    background-color: #FDF8F4; /* Supporting color */
+    color: #333;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #FFA07A; /* Primary color */
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #D1B28F; /* Primary hover color */
+}
+
+/* Results section */
+.results {
+    background-color: #9aad97ff; /* Accent color */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+#output {
+    font-size: 1.1rem;
+    color: #FDF8F4; /* Supporting color for contrast */
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #A57A8D; /* Supporting color */
+    color: white;
+    font-size: 1rem;
+    border-radius: 0 0 10px 10px;
+}

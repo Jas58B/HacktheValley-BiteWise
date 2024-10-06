@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiteWise AI</title>
+    <style>
+        body {
+            font-family: Montesserat, sans-serif;
+            background-color: #FDF8F4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #A57A8D;
+            text-align: center;
+            font-size: 2.5rem; /* Title size */
+        }
+        input {
+            padding: 15px;
+            margin: 10px;
+            font-size: 1.2rem; /* Input text size */
+        }
+        button {
+            padding: 15px 30px; /* Bigger button */
+            margin: 10px;
+            font-size: 1.5rem; /* Button text size */
+            background-color: #A57A8D;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #container {
+            display: flex;
+            justify-content: space-between; /* Even spacing */
+            align-items: stretch; /* Ensure equal height between text box and image */
+            width: 100%;
+            max-width: 1600px; /* Wider max width */
+            margin-top: 20px;
+            gap: 30px; /* Increased gap between text box and image */
+        }
+        #output {
+            white-space: pre-wrap;
+            background-color: #F8E5DA;
+            padding: 25px; /* Increased padding */
+            border: 2px solid #D1B28F;
+            border-radius: 20px; /* Same rounded corners */
+            width: 65%; /* Wider text box */
+            height: 650px; /* Height matches the image container */
+            font-size: 26px; /* Text size */
+            overflow-y: auto; /* Add scrolling if content exceeds height */
+        }
+        img {
+            width: 100%; /* Take full width of the image container */
+            height: 100%; /* Image height is now 100% to match the container */
+            object-fit: cover; /* Ensures the image covers the container without distortion */
+            border: 10px solid #D1B28F;
+            border-radius: 20px; /* Same rounded corners */
+        }
+        #imageContainer {
+            width: 50%; /* Larger image container */
+            height: 650px; /* Image container height matches the text box */
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>BiteWise AI</h1>
+    <input type="text" id="recipeInput" placeholder="Enter recipe name">
+    <button onclick="getRecipe()">Get Ingredients</button>
+
+    <!-- Container to hold the text and image side by side -->
+    <div id="container">
+        <!-- Output area for recipe details -->
+        <pre id="output"></pre>
+
+        <!-- Image container -->
+        <div id="imageContainer">
+            <img id="recipeImage" style="display:none;" alt="Recipe Image">
+        </div>
+    </div>
+
+    <!-- JavaScript function to fetch and display recipe data -->
+     <!--This section was modelled again by using the function random to randomly choose the tips -->
+    <script>
+        async function getRecipe() {
+            const recipeName = document.getElementById('recipeInput').value;
+            const response = await fetch(`/recipe/${recipeName}`);
+            const data = await response.json(); 
+            
+            if (data.error) {
+                document.getElementById('output').innerText = data.error;
+            } else {
+                let output = "Recipe Details:\n\n";
+
+                // Display Ingredients with Quantities
+                output += "Ingredients:\n";
+                data.ingredients.forEach(ingredient => {
+                    output += `- ${ingredient.name}: ${ingredient.quantity}\n`;
+                });
+        /* It basically looks at the user's input and tries to find it on the server */
+
+
+                // Display sustainable tips from random generator
+                output += `\nSustainable Tips: ${data.sustainable_tips}.\n`; // Use the random sustainable tip
+
+                // Update the text output
+                document.getElementById('output').innerText = output;
+
+                // Display the image if found from server
+                if (data.image) {
+                    document.getElementById('recipeImage').src = data.image;
+                    document.getElementById('recipeImage').style.display = "block";
+                } else {
+                    document.getElementById('recipeImage').style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
